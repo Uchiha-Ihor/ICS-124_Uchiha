@@ -12,7 +12,7 @@ def get_dovidnik():
 
     for line in dovidnik_list:
         line_list = line.split(';')
-        line_list[4] = line_list[4][:-1]  # Видаляє '\n' в кінці
+        line_list[0] = str(line_list[0])  # Видаляє '\n' в кінці
         dovidnik_drive.append(line_list)
 
 
@@ -34,7 +34,7 @@ def show_dovidniks(dovidniks):
 
     for dovidnik in dovidniks:
         if dovidnik_code_from <= dovidnik[0] <= dovidnik_code_to:
-            print('Дата: {:3} Код: {:10} Ціна Картоплі: {:20} Ціна Капусти: {:32} Ціна Цибулі: {:45}'.format(dovidnik[0], dovidnik[1], dovidnik[2], dovidnik[3] ,dovidnik[4]))
+            print('Дата: {:3} Код: {:3} Ціна Картоплі: {:3} Ціна Капусти: {:3} Ціна Цибулі: {:3}'.format(dovidnik[0], dovidnik[1], dovidnik[2], dovidnik[3] ,dovidnik[4]))
             kol_lines += 1
 
     # Перевірити чи був вивід хочаб одного рядка
@@ -59,7 +59,7 @@ def get_Analiz():
 
     for line in Analiz_list:
         line_list = line.split(';')
-        line_list[6] = line_list[6][:-1]  # Видаляє '\n' в кінці
+        line_list[1] = line_list[1][:-1]  # Видаляє '\n' в кінці
         Analiz_drive.append(line_list)
 
 
@@ -81,7 +81,7 @@ def show_Analizs(Analizs):
 
     for Analiz in Analizs:
         if Analiz_code_from <= Analiz[0] <= Analiz_code_to:
-            print(" Код: {:3} Найменування ринку: {:20} Дата: {:10} Ціна Картоплі: {:30} Ціна Капусти: {:40} Ціна Цибулі: {:50} Середня ціна: {:60} ".format(Analiz[0], Analiz[1], Analiz[2], Analiz[3], Analiz[4], Analiz[5], Analiz[6]))
+            print(" Код ринку: {:3} Найменування ринку: {:20} ".format(Analiz[0], Analiz[1]))
             kol_lines += 1
 
     # Перевірити чи був вивід хочаб одного рядка
