@@ -1,52 +1,61 @@
+"""формування заявок на розрахунок валового доходу по магазину
+"""
+# підключити функції з модуля `data_service`
 from data_service import get_dovidnik, get_Analiz
 
-analiz_rinky = {
+Analiz_rinky = {
     'Kod_rinky'      : '',
     'Name_rinky'     : '',
     'Data'           : '',
     'Price_kartopla' : 0.0,
     'Price_kapusta'  : 0.0,
     'Price_zebula'   : 0.0,
+    'summa_produkty' : 0.0,
     'Middle_price'   : 0.0
+
 }
 
-# print(get_dovidnik)
-# print(get_Analiz)
+dovidniks = get_dovidnik()
+Analizs = get_Analiz()
 
-dovidnik = get_dovidnik()
-analiz = get_Analiz()
+def Analiz_rinky_means():
+    """ Формування валового доходу універмагу
+    """
 
-def create_analiz_rinky():
-    
-    def get_client_name(client_code):
-        """повертає назву клієнта по його коду
-
+    def get_rinok_name(Analiz_code):
+        """ Повертає назву засоба по його коду
         Args:
-            client_code ([type]): код клієнта
-
+            dovidnyk_name ([type]): код засоба
         Returns:
-            [type]: назва клієнта
+            [type]: назва засобу
         """
 
-        for client in clients:
-            if client[0] == client_code:
-                return client[1]
+        for Analiz in Analizs:
+            if Analiz[0] == Analiz_code:
+                return Analiz[1]
 
-        return "*** код клієнта не знайдений"
-    analiz_rinky = []
+        return "*** Код не знайдений"
+    # Накопичувач валового доходу універмагу
+    Analiz_rinky_list = []
+
     for dovidnik in dovidniks:
-        analiz_rinky_tmp = analiz_rinky.copy()
 
-        analiz_rinky_tmp['Kod_rinky']        = dovidnik[1] 
-        analiz_rinky_tmp['Name_rinky']       = dovidnik[2]
-        analiz_rinky_tmp['Data']             = dovidnik[3] 
-        analiz_rinky_tmp['Price_kartopla']   = dovidnik[4] 
-        analiz_rinky_tmp['Price_kapusta']    = dovidnik[5] 
-        analiz_rinky_tmp['Price_zebula']     = dovidnik[6] 
-        analiz_rinky_tmp['Middle_price']     = (analiz_rinky_tmp['Price_kartopla'] + analiz_rinky_tmp['Price_kapusta'] + analiz_rinky_tmp['Price_zebula']) /3
-        analiz_rinky_list.append(analiz_rinky_tmp)
-    return analiz_rinky_list
-result = create_analiz_rinky()
+        # Створити копію шаблона
+        Analiz_rinky_tmp = Analiz_rinky.copy()
+
+        Analiz_rinky_tmp['Kod_rinky']        = dovidnik[1] 
+        Analiz_rinky_tmp['Name_rinky']       = get_rinok_name(dovidnik[1])
+        Analiz_rinky_tmp['Data']             = dovidnik[0] 
+        Analiz_rinky_tmp['Price_kartopla']   = dovidnik[2] 
+        Analiz_rinky_tmp['Price_kapusta']    = dovidnik[3] 
+        Analiz_rinky_tmp['Price_zebula']     = dovidnik[4]
+        Analiz_rinky_tmp['summa_produkty']   = float(Analiz_rinky_tmp['Price_kartopla']) + float(Analiz_rinky_tmp['Price_kapusta']) + float(Analiz_rinky_tmp['Price_zebula'])
+        Analiz_rinky_tmp['Middle_price']     = float(Analiz_rinky_tmp['summa_produkty']) /3
+        Analiz_rinky_list.append(Analiz_rinky_tmp)
+
+    return Analiz_rinky_list
+
+result = Analiz_rinky_means()
 
 for r in result:
     print(r)

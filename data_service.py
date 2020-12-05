@@ -12,7 +12,7 @@ def get_dovidnik():
 
     for line in dovidnik_list:
         line_list = line.split(';')
-        line_list[0] = str(line_list[0])  # Видаляє '\n' в кінці
+        line_list[4] = line_list[4][:-1]  # Видаляє '\n' в кінці
         dovidnik_drive.append(line_list)
 
 
@@ -42,8 +42,8 @@ def show_dovidniks(dovidniks):
         print("По Вашому запиту довідникіка нічого не знайдено.")
 
 
-dovidniks = get_dovidnik()
-show_dovidniks(dovidniks)
+# dovidniks = get_dovidnik()
+# show_dovidniks(dovidniks)
 
 def get_Analiz():
     """ Повертає вміст файла "Analizs.txt" у вигляді списка
@@ -88,5 +88,5 @@ def show_Analizs(Analizs):
     if kol_lines == 0:
         print("По Вашому запиту товарів не знайдено.")
 
-Analizs = get_Analiz()
-show_Analizs(Analizs)
+# Analizs = get_Analiz()
+# show_Analizs(Analizs)
