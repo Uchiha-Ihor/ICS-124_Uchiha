@@ -59,7 +59,7 @@ def write_Analiz_rinky(Analiz_rinky_list):
         Analiz_rinky_list ([type]): список аналізу
     """
 
-    with open('./Data/Analiz_rinky.txt', 'w') as Analiz_file:
+    with open('./Data/Analiz_rinky.txt', 'w', encoding="utf8") as Analiz_file:
         for Analiz_rinky in Analiz_rinky_list:
             line = \
                str(Analiz_rinky['Kod_rinky']) + ';' + \
